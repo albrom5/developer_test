@@ -21,11 +21,14 @@ class Command(BaseCommand):
         surveys = Survey.objects.bulk_create(
             [Survey(name=f'Pesquisa nº {s}') for s in range(1, 6)]
         )
-        self.stdout.write(f'Foram criadas {len(surveys)} pesquisas.')
+        questions = []
+        alternatives = []
+
         for survey in surveys:
             questions = SurveyQuestion.objects.bulk_create(
                 [SurveyQuestion(question_text=f'Questão nº {q}',
-                        survey=survey) for q in range(1, 11)]
+                                survey=survey,
+                                order=q) for q in range(1, 11)]
             )
             for question in questions:
                 alternatives = SurveyQuestionAlternative.objects.bulk_create(
@@ -34,3 +37,6 @@ class Command(BaseCommand):
                         alternative_text=alternative_choices[char]
                     ) for char in 'ABCDE']
                 )
+        self.stdout.write(f'Foram criadas {len(surveys)} pesquisas com '
+                          f'{len(questions)} questões de {len(alternatives)}'
+                          f' alternativas cada.')
