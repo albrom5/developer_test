@@ -10,14 +10,14 @@ from take5.survey.models import (
 class SurveyListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Survey
-        fields = ['name', 'created_at']
+        fields = ['id', 'name', 'created_at']
 
 
 class SurveyQuestionAlternativeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SurveyQuestionAlternative
-        fields = ['alternative_text']
+        fields = ['id', 'alternative_text']
 
 
 class SurveyQuestionSerializer(serializers.ModelSerializer):
@@ -26,7 +26,7 @@ class SurveyQuestionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SurveyQuestion
-        fields = ['question_text', 'alternatives']
+        fields = ['id', 'question_text', 'alternatives']
 
 
 class SurveyDetailSerializer(serializers.ModelSerializer):
@@ -34,4 +34,4 @@ class SurveyDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Survey
-        fields = ['name', 'questions']
+        fields = ['id', 'name', 'questions']
